@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-	cout << "Test";
+	cout << "First Commit";
 	cin.get();
 
 	return 0;
