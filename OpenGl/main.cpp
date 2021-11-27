@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 using namespace std;
@@ -11,7 +12,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 int main() {
 
-	if (!glfwInit()) // Initialization
+	if (!glfwInit()) // Initialization GLFW
 	{
 		cout << "Error";
 	}
@@ -27,6 +28,12 @@ int main() {
 		return -1;
 	}
 	glfwMakeContextCurrent(window); // Making the OpenGL context current
+	GLenum err = glewInit(); // Initialization GLEW
+	if (GLEW_OK != err)
+	{
+		/* Problem: glewInit failed, something is seriously wrong. */
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+	}
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	while (!glfwWindowShouldClose(window))
