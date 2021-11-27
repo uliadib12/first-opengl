@@ -36,15 +36,32 @@ int main() {
 	}
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+	float vertices[] = {
+	-0.5f, -0.5f,
+	 0.5f, -0.5f,
+	 0.0f,  0.5f
+	};
+
+	unsigned int buffer;
+	glGenBuffers(1, &buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBufferData(GL_ARRAY_BUFFER, 6*sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		// Keep running
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 
-		// Render
+		// Render Background Color
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		// DRAW TRIANGLES
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
 	}
 
 	glfwDestroyWindow(window);
